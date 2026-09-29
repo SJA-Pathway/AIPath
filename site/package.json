@@ -1,0 +1,15 @@
+{
+  "name": "aipath-site",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Live demo and task board for AIPath, served at aipath.sjapathway.com",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.65.0"
+  }
+}

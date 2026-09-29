@@ -1,0 +1,75 @@
+{
+  "_comment": "track is 'ai' (AI features) or 'web' (web development). Source of truth for the task board on aipath.sjapathway.com. To claim a task, open an issue titled with its id. Update status in the same PR that ships the work.",
+  "features": [
+    {
+      "id": "cv",
+      "track": "ai",
+      "name": "CV parser",
+      "module": "aipath/cv_parser.py",
+      "summary": "Turns a PDF, DOCX or text resume into structured JSON: contact details, sections, experience, education and skills."
+    },
+    {
+      "id": "rs",
+      "track": "ai",
+      "name": "Resume scorer",
+      "module": "aipath/resume_scorer.py",
+      "summary": "ATS-style 0–100 score built from named checks, each with feedback the candidate can act on."
+    },
+    {
+      "id": "sm",
+      "track": "ai",
+      "name": "Skill matcher",
+      "module": "aipath/skill_matcher.py",
+      "summary": "Compares a job description with a CV and shows matched skills, plus missing required and nice-to-have skills."
+    },
+    {
+      "id": "iq",
+      "track": "ai",
+      "name": "Interview question generator",
+      "module": "aipath/interview.py",
+      "summary": "Role-aware questions that quote the candidate's own CV lines and probe the gaps against the job."
+    },
+    {
+      "id": "platform",
+      "track": "web",
+      "name": "API & platform",
+      "module": "aipath/api.py",
+      "summary": "FastAPI service, clients, CI and this live site."
+    }
+  ],
+  "tasks": [
+    { "id": "CV-1", "feature": "cv", "track": "ai", "status": "done", "level": "intermediate", "title": "Baseline text parser", "detail": "Regex contact extraction, heading-based sections, taxonomy skills. PDF/DOCX via optional extras." },
+    { "id": "CV-2", "feature": "cv", "track": "ai", "status": "open", "level": "good-first-issue", "title": "More section heading synonyms", "detail": "Recognise headings like 'Internships', 'Volunteering', 'Languages', 'Achievements' in SECTION_HEADINGS, with a test for each." },
+    { "id": "CV-3", "feature": "cv", "track": "ai", "status": "open", "level": "intermediate", "title": "Structured experience entries", "detail": "Split the experience section into entries with title, company, start date, end date and bullets. Handle 'present' and month formats." },
+    { "id": "CV-4", "feature": "cv", "track": "ai", "status": "open", "level": "intermediate", "title": "Structured education entries", "detail": "Extract degree, institution, graduation year and grade (GPA / percentage / class) from the education section." },
+    { "id": "CV-5", "feature": "cv", "track": "ai", "status": "open", "level": "advanced", "title": "Layout-aware PDF parsing", "detail": "Two-column CVs currently interleave text. Use pdfplumber word positions to read columns in order. Add fixtures." },
+    { "id": "CV-6", "feature": "cv", "track": "ai", "status": "open", "level": "good-first-issue", "title": "Synthetic CV fixture set", "detail": "Write 20 varied, entirely fictional CVs (tests/fixtures/*.txt) covering different fields and formats. No real personal data." },
+    { "id": "CV-7", "feature": "cv", "track": "ai", "status": "open", "level": "intermediate", "title": "Name extraction with spaCy", "detail": "Fall back to spaCy PERSON entities when the first-line heuristic fails. Keep spaCy an optional extra." },
+
+    { "id": "RS-1", "feature": "rs", "track": "ai", "status": "done", "level": "intermediate", "title": "Explainable six-check scorer", "detail": "Contact, sections, length, action verbs, quantified impact, skills/job keywords. Each check returns points and feedback." },
+    { "id": "RS-2", "feature": "rs", "track": "ai", "status": "open", "level": "good-first-issue", "title": "Detect weak bullet openers", "detail": "Flag bullets starting with 'Responsible for', 'Worked on', 'Helped with' and suggest a stronger verb. Grow ACTION_VERBS." },
+    { "id": "RS-3", "feature": "rs", "track": "ai", "status": "open", "level": "advanced", "title": "Calibrate check weights", "detail": "Collect recruiter ratings for the fixture CVs and fit the weights so the score correlates with human judgement. Document the method." },
+    { "id": "RS-4", "feature": "rs", "track": "ai", "status": "open", "level": "intermediate", "title": "ATS-unfriendly formatting check", "detail": "Detect tables, text in images, headers/footers and unusual fonts in PDF/DOCX uploads and report them as a check." },
+    { "id": "RS-5", "feature": "rs", "track": "ai", "status": "open", "level": "intermediate", "title": "Rewrite suggestions for weak bullets", "detail": "Rule-based first: for bullets with no metric or verb, return a suggested template ('<Verb> <what> by <metric>')." },
+
+    { "id": "SM-1", "feature": "sm", "track": "ai", "status": "open", "level": "good-first-issue", "title": "Grow the skills taxonomy", "detail": "Add data science, frontend, cloud and security skills with aliases to aipath/data/skills.json. Add a test for any tricky alias." },
+    { "id": "SM-2", "feature": "sm", "track": "ai", "status": "open", "level": "intermediate", "title": "'X or Y' requirements", "detail": "'PyTorch or TensorFlow' should be satisfied by either. Treat alternatives as one requirement group." },
+    { "id": "SM-3", "feature": "sm", "track": "ai", "status": "open", "level": "advanced", "title": "Semantic skill matching", "detail": "Use sentence embeddings so 'deep learning frameworks' partially matches PyTorch. Report exact vs semantic matches separately." },
+    { "id": "SM-4", "feature": "sm", "track": "ai", "status": "open", "level": "intermediate", "title": "Years-of-experience extraction", "detail": "Parse '3+ years of Python' from job descriptions and estimate the candidate's years from dated experience entries (needs CV-3)." },
+    { "id": "SM-5", "feature": "sm", "track": "ai", "status": "done", "level": "intermediate", "title": "Required vs nice-to-have matching", "detail": "Weighted coverage score; optional skills count half. Lists matched, missing and extra skills." },
+
+    { "id": "IQ-1", "feature": "iq", "track": "ai", "status": "done", "level": "intermediate", "title": "Template question generator", "detail": "Behavioural, CV-grounded experience, gap and technical questions with answer guides." },
+    { "id": "IQ-2", "feature": "iq", "track": "ai", "status": "open", "level": "advanced", "title": "LLM model answers grounded in the CV", "detail": "Add a provider-agnostic LLM step that drafts model answers using only facts from the CV. Include tests that reject invented facts." },
+    { "id": "IQ-3", "feature": "iq", "track": "ai", "status": "open", "level": "good-first-issue", "title": "Behavioural bank by seniority", "detail": "Add junior, mid and senior behavioural question sets and a 'seniority' parameter." },
+    { "id": "IQ-4", "feature": "iq", "track": "ai", "status": "open", "level": "intermediate", "title": "Role-specific technical banks", "detail": "Curated technical questions for ML Engineer, Data Scientist and MLOps roles, selected by the role string." },
+
+    { "id": "API-1", "feature": "platform", "track": "web", "status": "done", "level": "intermediate", "title": "FastAPI service", "detail": "/parse, /parse/file, /score, /match, /interview and /health with OpenAPI docs." },
+    { "id": "API-2", "feature": "platform", "track": "web", "status": "open", "level": "good-first-issue", "title": "Dockerfile for the API", "detail": "Slim Python image, non-root user, uvicorn entrypoint, and a README section on running it." },
+    { "id": "API-3", "feature": "platform", "track": "web", "status": "open", "level": "good-first-issue", "title": "CI on pull requests", "detail": "GitHub Actions workflow running ruff and pytest on Python 3.10 and 3.13." },
+    { "id": "API-4", "feature": "platform", "track": "web", "status": "open", "level": "intermediate", "title": "TypeScript client", "detail": "Typed client package generated from the OpenAPI schema, published under clients/typescript." },
+    { "id": "API-5", "feature": "platform", "track": "web", "status": "open", "level": "intermediate", "title": "Request limits and rate limiting", "detail": "Cap JSON body size and add per-IP rate limiting middleware with tests." },
+    { "id": "WEB-1", "feature": "platform", "track": "web", "status": "done", "level": "intermediate", "title": "Live site with demo and task board", "detail": "aipath.sjapathway.com on Cloudflare Workers, rendering this file." },
+    { "id": "WEB-2", "feature": "platform", "track": "web", "status": "open", "level": "intermediate", "title": "Python ↔ JS parity tests", "detail": "The browser demo is a JS port of the Python engine. Add shared fixtures and a test that both produce the same results." },
+    { "id": "WEB-3", "feature": "platform", "track": "web", "status": "open", "level": "advanced", "title": "Run the Python engine in the browser", "detail": "Replace the JS port with Pyodide loading the real aipath package, so the demo can never drift." }
+  ]
+}

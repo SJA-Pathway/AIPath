@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aipath"
+version = "0.1.0"
+description = "Open-source AI tooling for careers: CV parsing, resume scoring, skill matching and interview question generation."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "SJA Pathway", email = "ceo@sjapathway.com" }]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+api = ["fastapi>=0.110", "uvicorn[standard]>=0.29", "python-multipart>=0.0.9"]
+docs = ["pypdf>=4.0", "python-docx>=1.1"]
+dev = ["aipath[api,docs]", "pytest>=8", "httpx>=0.27", "ruff>=0.5"]
+
+[project.urls]
+Homepage = "https://aipath.sjapathway.com"
+Repository = "https://github.com/SJA-Pathway/AIPath"
+
+[tool.setuptools]
+packages = ["aipath"]
+
+[tool.setuptools.package-data]
+aipath = ["data/*.json"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

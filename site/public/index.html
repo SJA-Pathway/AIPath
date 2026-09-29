@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AIPath · SJA Pathway</title>
+  <meta name="description" content="Open-source AI tooling for careers: CV parsing, resume scoring, skill matching and interview question generation. Try it live and pick a task to contribute.">
+  <meta property="og:title" content="AIPath · SJA Pathway open source">
+  <meta property="og:description" content="CV parser, resume scorer, skill matcher and interview question generator, built in the open.">
+  <meta property="og:url" content="https://aipath.sjapathway.com">
+  <meta name="theme-color" content="#0A0A0A">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">AI</span>Path</a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#demo">Try it</a>
+        <a href="#tasks">Tasks</a>
+        <a href="#start">Contribute</a>
+        <a class="gh" href="https://github.com/SJA-Pathway/AIPath" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">SJA Pathway · Open source · AI / ML Engineering track</p>
+        <h1>Open-source AI tooling <span class="accent">for careers</span></h1>
+        <p class="lede">A CV parser, resume scorer, skill matcher and interview question generator, built in the open by the community. Try the working baseline below, then pick a task and make it better.</p>
+        <div class="cta">
+          <a class="btn primary" href="#tasks">Pick a task</a>
+          <a class="btn" href="#demo">Try the live demo</a>
+        </div>
+        <dl class="stats" id="stats" aria-live="polite"></dl>
+      </div>
+    </section>
+
+    <section id="features" class="band">
+      <div class="wrap">
+        <h2>Features</h2>
+        <p class="sub">Each feature has a working baseline in <code>aipath/</code>. Progress bars count tasks shipped from the board.</p>
+        <div class="features" id="features-grid"></div>
+      </div>
+    </section>
+
+    <section id="demo" class="band">
+      <div class="wrap">
+        <h2>Try it live</h2>
+        <p class="sub">Runs entirely in your browser, and nothing is uploaded. The sample CV and job description are fictional. Paste your own to try it.</p>
+
+        <div class="tabs" role="tablist" aria-label="Demo tool">
+          <button role="tab" aria-selected="true" data-tool="match">Skill matcher</button>
+          <button role="tab" aria-selected="false" data-tool="score">Resume scorer</button>
+          <button role="tab" aria-selected="false" data-tool="parse">CV parser</button>
+          <button role="tab" aria-selected="false" data-tool="interview">Interview questions</button>
+        </div>
+
+        <div class="demo">
+          <div class="inputs">
+            <label>CV text
+              <textarea id="cv" rows="14" spellcheck="false"></textarea>
+            </label>
+            <label id="jd-wrap">Job description
+              <textarea id="jd" rows="9" spellcheck="false"></textarea>
+            </label>
+            <label id="role-wrap" hidden>Role
+              <input id="role" value="NLP Engineer">
+            </label>
+            <div class="row">
+              <button class="btn primary" id="run">Run</button>
+              <button class="btn ghost" id="reset">Reset sample</button>
+            </div>
+          </div>
+          <div class="output" id="output" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tasks" class="band">
+      <div class="wrap">
+        <h2>Task board</h2>
+        <p class="sub">What to work on next. Claiming a task opens a pre-filled GitHub issue so nobody duplicates your work. The board is rendered from <a href="https://github.com/SJA-Pathway/AIPath/blob/main/tasks.json"><code>tasks.json</code></a>, so update it in your PR when you ship.</p>
+        <div class="track-tabs" role="tablist" aria-label="Track">
+          <button role="tab" aria-selected="true" data-track="">All</button>
+          <button role="tab" aria-selected="false" data-track="ai">AI features</button>
+          <button role="tab" aria-selected="false" data-track="web">Web development</button>
+        </div>
+        <div class="filters">
+          <label>Feature <select id="f-feature"><option value="">All</option></select></label>
+          <label>Level
+            <select id="f-level">
+              <option value="">All</option>
+              <option value="good-first-issue">Good first issue</option>
+              <option value="intermediate">Intermediate</option>
+              <option value="advanced">Advanced</option>
+            </select>
+          </label>
+          <label>Status
+            <select id="f-status">
+              <option value="open">Open</option>
+              <option value="">All</option>
+              <option value="done">Done</option>
+            </select>
+          </label>
+        </div>
+        <ul class="tasks" id="task-list"></ul>
+      </div>
+    </section>
+
+    <section id="start" class="band">
+      <div class="wrap two">
+        <div>
+          <h2>Contribute</h2>
+          <ol class="steps">
+            <li>Pick an open task above. Good first issues are a gentle start.</li>
+            <li>Click <strong>Claim on GitHub</strong> to open an issue, so others know it's taken.</li>
+            <li>Fork, branch as <code>feat/&lt;task-id&gt;-short-name</code>, and open a PR with tests.</li>
+            <li>Mark the task <code>done</code> in <code>tasks.json</code> in the same PR.</li>
+            <li>Say hello in the <strong>AIPath</strong> channel on <a href="https://discord.gg/qqE5EqXfdy" rel="noopener">Discord</a>.</li>
+          </ol>
+          <p class="note">Contributing is free and open to everyone, and this track is aimed at people with 2–3 years of AI/ML experience. It gives you experience and portfolio work, but not a certificate or reference letter. Those come with the paid <a href="https://sjapathway.com/#pricing">internship plans</a>.</p>
+        </div>
+        <div>
+          <h3>Run it locally</h3>
+<pre><code>git clone https://github.com/SJA-Pathway/AIPath.git
+cd AIPath
+python3 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -e ".[dev]"
+pytest                          # run the tests
+uvicorn aipath.api:app --reload # API at :8000/docs</code></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <span>AIPath is an <a href="https://sjapathway.com/open-source">SJA Pathway open-source</a> project · MIT licence</span>
+      <span><a href="https://github.com/SJA-Pathway">All repos</a> · <a href="mailto:ceo@sjapathway.com">Contact</a></span>
+    </div>
+  </footer>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
